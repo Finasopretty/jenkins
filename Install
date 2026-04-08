@@ -1,0 +1,27 @@
+sudo yum update -y
+sudo yum install java-17-amazon-corretto -y
+
+
+java -version
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+https://pkg.jenkins.io/redhat-stable/jenkins.repo
+
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+sudo yum install jenkins -y
+
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+
+sudo systemctl status jenkins
+
+In your EC2 Security Group, add:
+
+Type: Custom TCP
+Port: 8080
+Source: 0.0.0.0/0 (or your IP)
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+http://<your-ec2-ip>:8080
